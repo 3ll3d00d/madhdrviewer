@@ -31,14 +31,14 @@ def parse_measurements(file):
             logger.warning(f"{file} is incomplete")
         else:
             scene_start = np.frombuffer(f.read(4 * scene_count), dtype=np.uint32)
-            logger.info(f"File Position: {f.tell()}")
+            logger.debug(f"File Position: {f.tell()}")
             scene_end = np.frombuffer(f.read(4 * scene_count), dtype=np.uint32)
-            logger.info(f"File Position: {f.tell()}")
+            logger.debug(f"File Position: {f.tell()}")
             peak_nits = np.frombuffer(f.read(4 * scene_count), dtype=np.uint32)
-            logger.info(f"File Position: {f.tell()}")
+            logger.debug(f"File Position: {f.tell()}")
             pq_histogram = np.frombuffer(f.read(2 * frame_count * 32), dtype=np.uint16)
-            logger.info(f"File Position: {f.tell()}")
-            logger.info(f"File Size: {os.path.getsize(file)}")
+            logger.debug(f"File Position: {f.tell()}")
+            logger.debug(f"File Size: {os.path.getsize(file)}")
             hdr_data = HDRData(file,
                                max_cll,
                                np.column_stack((scene_start, scene_end, peak_nits)),
